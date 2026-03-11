@@ -1,0 +1,31 @@
+# Render deployment configuration (backend-only repo)
+# https://render.com/docs/render-yaml
+
+services:
+  - type: web
+    name: firereach-backend
+    runtime: python
+    buildCommand: pip install uv && uv sync --no-install-project
+    startCommand: .venv/bin/uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_FROM_NAME
+        value: FireReach
+      - key: CORS_ORIGINS
+        sync: false
