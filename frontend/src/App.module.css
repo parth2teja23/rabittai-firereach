@@ -1,0 +1,251 @@
+/* App.module.css */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.logoIcon { color: var(--accent); }
+
+.logoText {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+
+.logoBadge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: rgba(249,115,22,.15);
+  color: var(--accent);
+  border: 1px solid rgba(249,115,22,.3);
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-top: 1px;
+}
+
+.tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.headerLinks {
+  display: flex;
+  gap: 12px;
+}
+
+.headerLink {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+.headerLink:hover { color: var(--accent); text-decoration: none; }
+
+/* ── Main layout ─────────────────────────────────────────────── */
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .main { grid-template-columns: 1fr; }
+}
+
+/* ── Left panel ──────────────────────────────────────────────── */
+.left {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 1px solid var(--border);
+  min-height: calc(100vh - 65px);
+}
+
+@media (max-width: 860px) {
+  .left { border-right: none; border-bottom: 1px solid var(--border); min-height: unset; }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.cardSub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Tool reference card */
+.toolCard { padding: 16px 20px; }
+
+.toolTitle {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.toolList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  counter-reset: tool;
+}
+
+.toolList li {
+  counter-increment: tool;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.toolList li::before {
+  content: counter(tool);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolList code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #93c5fd;
+}
+
+.toolList span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── Right panel ─────────────────────────────────────────────── */
+.right {
+  padding: 24px;
+  min-height: calc(100vh - 65px);
+}
+
+/* Error */
+.errorBox {
+  background: rgba(239,68,68,.08);
+  border: 1px solid rgba(239,68,68,.3);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 14px;
+  color: #fca5a5;
+}
+
+/* Loading */
+.loadingBox {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.loadingSpinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loadingTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.loadingDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Empty state */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  gap: 16px;
+}
+
+.emptyIcon { color: var(--accent-dim); opacity: .5; }
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.emptyDesc {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 400px;
+  line-height: 1.7;
+}

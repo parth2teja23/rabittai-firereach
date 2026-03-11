@@ -1,0 +1,31 @@
+# Render deployment configuration
+# https://render.com/docs/render-yaml
+
+services:
+  # ── FastAPI Backend ─────────────────────────────────────────────────────────
+  - type: web
+    name: firereach-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install uv && uv sync --no-install-project --no-dev
+    startCommand: uv run uvicorn main:app --host 0.0.0.0 --port 10000
+    plan: free
+    envVars:
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_FROM_NAME
+        value: FireReach
+      - key: CORS_ORIGINS
+        value: '["https://firereach.vercel.app","http://localhost:5173"]'
